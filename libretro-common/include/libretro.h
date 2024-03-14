@@ -2535,6 +2535,12 @@ enum retro_mod
  */
 #define RETRO_ENVIRONMENT_GET_PLAYLIST_DIRECTORY 79
 
+/* const struct retro_save_ram_updated_callback *--
+* Lets the frontend know when the core has updated the save RAM.
+*/
+#define RETRO_ENVIRONMENT_SET_SAVE_RAM_UPDATED_CALLBACK (80 | RETRO_ENVIRONMENT_EXPERIMENTAL)
+
+
 /**@}*/
 
 /**
@@ -2692,6 +2698,13 @@ struct retro_vfs_dir_handle;
 #define RETRO_VFS_STAT_IS_CHARACTER_SPECIAL   (1 << 2)
 
 /** @} */
+
+/* Notifies libretro that the save RAM has been updated. */
+typedef void (RETRO_CALLCONV *retro_save_ram_updated_callback_t) (void);
+
+struct retro_save_ram_updated_callback {
+   retro_save_ram_updated_callback_t callback;
+};
 
 /**
  * Returns the path that was used to open this file.
